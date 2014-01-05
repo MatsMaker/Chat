@@ -1,0 +1,20 @@
+{
+  "name": "TipsOfTheDay",
+  "description": "Chat",
+  "version": "0.0.1",
+  "private": false,
+  "author": "mats",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MatsMaker/Chat.git"
+  },
+  "engines": {
+    "node": "0.10.x",
+    "npm": "1.2.x"
+  },
+  "scripts": {},
+  "dependencies": {
+    "websocket": "~1.0.8"
+  },
+  "devDependencies": {}
+}
