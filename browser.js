@@ -7,42 +7,70 @@ var socket = new WebSocket("ws://localhost:8081");
 
 
 var inputMessage = document.getElementById('imput-message');
+var login = 'noname';
 var state = document.getElementById('state');
+
+var Message = function(par){
+   var obj = {
+      login: login,
+      message: par.message.value
+   }
+
+   return obj;
+};
+
+(function(){
+   login = prompt('Введите Ваше имя:', 'noname');
+   document.getElementById('view-name').innerHTML = login;
+})();
+
 
 // отправить сообщение из формы publish
 document.forms.publish.onsubmit = function() {
 
-  var outgoingMessage = this.message.value;
-  socket.send(outgoingMessage);
+   var outgoingMessage = new Message(this);
+
+  socket.send(JSON.stringify(outgoingMessage));
   inputMessage.value = '';
 
   return false;
 };
 
 inputMessage.onfocus = function() {
-   state.innerHTML="&hellip;";
-   socket.send("&hellip;");
+   var message = {
+      login: login,
+      state: "&hellip;"
+   };
+   socket.send(JSON.stringify(message));
 }
 inputMessage.onblur = function() {
-   state.innerHTML="";
-   socket.send("&not;");
+   var message = {
+      login: login,
+      state: "&not;"
+   };
+   socket.send(JSON.stringify(message));
 }
 
 
 
 // обработчик входящих сообщений
 socket.onmessage = function(event) {
-   var incomingMessage = event.data;
-   if(incomingMessage == "&hellip;"){
-      state.innerHTML="&hellip;";
-   }
+   var incomingMessage = JSON.parse(event.data);
 
-   if(incomingMessage == "&not;"){
-      state.innerHTML="";
-   }
+   if(typeof(incomingMessage.state) != "undefined"){
 
-   if(incomingMessage != "&hellip;" && incomingMessage != "&not;"){
-      showMessage(incomingMessage);
+      console.log(incomingMessage.state);
+
+      if(incomingMessage.state == "&hellip;"){
+         state.innerHTML = incomingMessage.login + " : набирает сообщение";
+      }
+
+      if(incomingMessage.state == "&not;"){
+         state.innerHTML="";
+      }
+
+   }else{
+      showMessage(incomingMessage.login+' : '+incomingMessage.message);
    };
 };
 

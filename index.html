@@ -1,21 +1,24 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-</head>
-<body>
+	<head>
+		<meta charset="utf-8">
+	</head>
+	<body>
 
-<!-- форма для отправки сообщений -->
-<form name="publish">
-  <input id="imput-message" type="text" name="message"/>
-  <input type="submit" value="Отправить"/>
-</form>
+		<!-- форма для отправки сообщений -->
+		<form name="publish">
+			login: <span id='view-name'></span><br/>
+			<br/>
+			<br/>
+			massage: <input id="imput-message" type="text" name="message"/><br/>
+			<input type="submit" value="Отправить"/>
+		</form>
 
-<!-- здесь будут появляться входящие сообщения -->
-<div id="subscribe"></div>
-<div id="state"></div>
+		<!-- здесь будут появляться входящие сообщения -->
+		<div id="subscribe"></div>
+		<div id="state"></div>
 
-<script src="browser.js"></script>
+		<script src="browser.js"></script>
 
-</body>
+	</body>
 </html>

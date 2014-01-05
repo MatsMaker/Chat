@@ -14,7 +14,7 @@ webSocketServer.on('connection', function(ws) {
   console.log("новое соединение " + id);
 
   ws.on('message', function(message) {
-    console.log('получено сообщение ' + message);
+    console.log(JSON.stringify(message));
 
     for(var key in clients) {
       clients[key].send(message);
