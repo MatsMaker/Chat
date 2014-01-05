@@ -61,7 +61,7 @@ socket.onmessage = function(event) {
 
       console.log(incomingMessage.state);
 
-      if(incomingMessage.state == "&hellip;"){
+      if(incomingMessage.state == "&hellip;" && incomingMessage.login != login){
          state.innerHTML = incomingMessage.login + " : набирает сообщение";
       }
 
